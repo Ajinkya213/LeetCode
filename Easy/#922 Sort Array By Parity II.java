@@ -1,28 +1,30 @@
 class Solution {
     public int[] sortArrayByParityII(int[] nums) {
+        int evenPtr = 0;
+        int oddPtr = 1;
+        int n = nums.length;
 
         /*
-        * Completed the challenge by doing the in place sorting
-        * Time complexity O(n^2);
-        * Space complexity O(1);
-        * Time taken 6 ms.
-        * Need to find a better way.
-        * */
-        for(int i = 0 ; i < nums.length - 1; i++){
-            int index =  i % 2;
-            if(nums[i] % 2 != index){
-                int j = i+1;
-                while(j < nums.length){
-                    if(nums[j] % 2 == index){
-                        int temp = nums[i];
-                        nums[i] = nums[j];
-                        nums[j] = temp;
-                        break;
-                    }
-                    j++;
-                }
+        Time complexity = O(n);
+        Space complexity = O(1);
+        Best solution.
+        */
+        while (evenPtr < n && oddPtr < n) {
+            while (oddPtr < n && nums[oddPtr] % 2 == 1) {
+                oddPtr += 2;
+            }
+
+            while (evenPtr < n && nums[evenPtr] % 2 == 0) {
+                evenPtr += 2;
+            }
+
+            if (evenPtr < n && oddPtr < n) {
+                int temp = nums[evenPtr];
+                nums[evenPtr] = nums[oddPtr];
+                nums[oddPtr] = temp;
             }
         }
+
         return nums;
     }
 }
