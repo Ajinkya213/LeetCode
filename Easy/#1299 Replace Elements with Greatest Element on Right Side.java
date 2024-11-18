@@ -8,16 +8,14 @@ class Solution {
             return arr;
         }
 
-        for(int i = 0 ; i < len - 1; i++){
-            int max = Integer.MIN_VALUE;
-            for(int j = i+1; j < len ; j++){
-                if(max < arr[j]){
-                    max = arr[j];
-                }
-            }
-            replaceElements[i] = max;
+        //Find the max and place it accordingly
+        int max = Integer.MIN_VALUE;
+        for(int i = len - 1; i > 0; i--){
+            max = Math.max(max, arr[i]);
+            replaceElements[i - 1] = max;
         }
 
+        //Put -1 in the last
         replaceElements[len-1] = -1;
 
         return replaceElements;
