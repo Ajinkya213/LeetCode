@@ -1,41 +1,24 @@
 class Solution {
+
     public int[] decrypt(int[] code, int k) {
-        int len = code.length;
-        int[] decryptedCode = new int[len];
-
-        // Return array of zeros if k is 0
+        int[] result = new int[code.length];
+        // If k is 0, return the result directly.
         if (k == 0) {
-            return decryptedCode;
+            return result;
         }
-
-        for (int i = 0; i < len; i++) {
-            int sum = 0;
+        for (int i = 0; i < result.length; i++) {
             if (k > 0) {
-                int fIndex = i + 1;
-                int count = 1;
-                while (count <= k) {
-                    if (fIndex >= len) {
-                        fIndex = 0;
-                    }
-                    sum += code[fIndex];
-                    fIndex++;
-                    count++;
+                // If k is greater than 0, store the sum of next k numbers.
+                for (int j = i + 1; j < i + k + 1; j++) {
+                    result[i] += code[j % code.length];
                 }
-                decryptedCode[i] = sum;
-            } else {  // k < 0
-                int fIndex = i - 1;
-                int count = 1;
-                while (count <= Math.abs(k)) {
-                    if (fIndex < 0) {
-                        fIndex = len - 1;
-                    }
-                    sum += code[fIndex];
-                    fIndex--;
-                    count++;
+            } else {
+                // If k is less than 0, store the sum of previous -1*k numbers.
+                for (int j = i - Math.abs(k); j < i; j++) {
+                    result[i] += code[(j + code.length) % code.length];
                 }
-                decryptedCode[i] = sum;
             }
         }
-        return decryptedCode;
+        return result;
     }
 }
