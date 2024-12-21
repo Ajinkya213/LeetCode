@@ -1,18 +1,20 @@
 class Solution {
     public String makeGood(String s) {
-        StringBuilder str = new StringBuilder(s);
+        Stack<Character> stack = new Stack<>();
 
-        for(int i = 0; i < str.length() - 1;){
-
-            if( str.charAt(i) - 'a' == str.charAt(i+1) - 'A' || str.charAt(i) - 'A' == str.charAt(i+1) - 'a'){
-                str.delete(i, i+2);
-                i = 0;
-            }else{
-                i++;
+        for (char c : s.toCharArray()) {
+            if (!stack.isEmpty() && Math.abs(c - stack.peek()) == 32) {
+                stack.pop();
+            } else {
+                stack.push(c);
             }
-            System.out.println(str.toString());
         }
 
-        return str.toString();
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty()) {
+            result.insert(0, stack.pop());
+        }
+
+        return result.toString();
     }
 }
