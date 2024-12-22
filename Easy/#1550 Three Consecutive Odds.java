@@ -1,14 +1,11 @@
 class Solution {
-    public boolean threeConsecutiveOdds(int[] arr) {
-        int len = arr.length;
-        if(len < 2){
-            return false;
-        }
 
-        for(int i = 0; i < len - 2; i++){
-            if(arr[i] % 2 == 1 && arr[i+1] % 2 == 1 && arr[i+2] % 2 == 1){
-                return true;
-            }
+    public boolean threeConsecutiveOdds(int[] arr) {
+
+        for (int i = 0; i < arr.length - 2; i++) {
+            int product = arr[i] * arr[i + 1] * arr[i + 2];
+
+            if (product % 2 == 1) return true;
         }
         return false;
     }
