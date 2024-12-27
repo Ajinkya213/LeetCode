@@ -7,21 +7,24 @@ class Solution {
         reformatedDate.append("-");
 
         //Care month
-        Map<String, String> map = new HashMap<>();
-        String [] month = new String []{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-
-        for(int i = 0 ; i < month.length; i++){
-            if(i >= 0 && i < 9){
-                int num = i + 1;
-                map.put(month[i], "0"+num);
-            }else{
-                int num = i + 1;
-                map.put(month[i], num+"");
-            }
+        String month = "";
+        switch(tokens[1]){
+            case "Jan" : month = "01"; break;
+            case "Feb" : month = "02"; break;
+            case "Mar" : month = "03"; break;
+            case "Apr" : month = "04"; break;
+            case "May" : month = "05"; break;
+            case "Jun" : month = "06"; break;
+            case "Jul" : month = "07"; break;
+            case "Aug" : month = "08"; break;
+            case "Sep" : month = "09"; break;
+            case "Oct" : month = "10"; break;
+            case "Nov" : month = "11"; break;
+            case "Dec" : month = "12"; break;
         }
 
         //System.out.println(map);
-        reformatedDate.append(map.get(tokens[1]));
+        reformatedDate.append(month);
         reformatedDate.append("-");
 
 
