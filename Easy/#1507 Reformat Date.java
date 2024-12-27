@@ -1,49 +1,31 @@
 class Solution {
     public String reformatDate(String date) {
-        StringBuilder reformatedDate = new StringBuilder();
-        String tokens [] = date.split(" ");
-
-        reformatedDate.append(tokens[2]);
-        reformatedDate.append("-");
-
-        //Care month
-        String month = "";
-        switch(tokens[1]){
-            case "Jan" : month = "01"; break;
-            case "Feb" : month = "02"; break;
-            case "Mar" : month = "03"; break;
-            case "Apr" : month = "04"; break;
-            case "May" : month = "05"; break;
-            case "Jun" : month = "06"; break;
-            case "Jul" : month = "07"; break;
-            case "Aug" : month = "08"; break;
-            case "Sep" : month = "09"; break;
-            case "Oct" : month = "10"; break;
-            case "Nov" : month = "11"; break;
-            case "Dec" : month = "12"; break;
+        String[] str = date.split(" ");
+        StringBuilder res = new StringBuilder();
+        res.append(str[2]);
+        String month = str[1].equals("Jan") ? "01"
+                : str[1].equals("Feb") ? "02"
+                : str[1].equals( "Mar" )? "03"
+                : str[1].equals("Apr") ? "04"
+                : str[1].equals("May") ? "05"
+                : str[1].equals("Jun") ? "06"
+                : str[1].equals("Jul") ? "07"
+                : str[1].equals("Aug") ? "08"
+                : str[1].equals("Sep") ? "09"
+                : str[1].equals("Oct") ? "10"
+                : str[1].equals("Nov") ? "11"
+                : "12";
+        res.append("-");
+        res.append(month);
+        res.append("-");
+        if(str[0].length() == 3){
+            res.append("0");
+            res.append(str[0].charAt(0));
+        }else{
+            res.append(str[0].charAt(0));
+            res.append(str[0].charAt(1));
         }
 
-        //System.out.println(map);
-        reformatedDate.append(month);
-        reformatedDate.append("-");
-
-
-        //Care Day
-        String f = "";
-        for(int i = 0; i < tokens[0].length(); i++){
-            if(Character.isDigit(tokens[0].charAt(i))){
-                f += tokens[0].charAt(i);
-            }else{
-                break;
-            }
-        }
-
-        if(Integer.valueOf(f) > 0 && Integer.valueOf(f) < 10){
-            f = "0"+f;
-        }
-
-        reformatedDate.append(f);
-        return reformatedDate.toString();
+        return res.toString();
     }
-
 }
