@@ -1,29 +1,36 @@
 class MyHashSet {
-
-    int hashSet [];
+    private int primarySize;
+    private int secondarySize;
+    private boolean[][] buckets;
 
     public MyHashSet() {
-        this.hashSet = new int [1000001];
-        for(int i = 0; i < this.hashSet.length ; i++){
-            this.hashSet[i] = -1;
-        }
+        primarySize = 1001;
+        secondarySize = 1000;
+        buckets = new boolean[primarySize][];
     }
 
     public void add(int key) {
-        if(this.hashSet[key] != key){
-            this.hashSet[key] = key;
-        }
+        int p = key/primarySize;
+        int s = key%secondarySize;
+        if (buckets[p]==null)
+            buckets[p]=new boolean[secondarySize];
+        buckets[p][s]=true;
     }
 
     public void remove(int key) {
-        this.hashSet[key] = -1;
+        int p = key/primarySize;
+        int s = key%secondarySize;
+        if (buckets[p]==null)
+            return;
+        buckets[p][s]=false;
     }
 
     public boolean contains(int key) {
-        if(this.hashSet[key] > -1){
-            return true;
-        }
-        return false;
+        int p = key/primarySize;
+        int s = key%secondarySize;
+        if (buckets[p]==null)
+            return false;
+        return buckets[p][s];
     }
 }
 
