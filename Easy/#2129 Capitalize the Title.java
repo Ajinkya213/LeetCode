@@ -1,7 +1,7 @@
 class Solution {
     public String capitalizeTitle(String title) {
         String tokens [] = title.split(" ");
-        StringBuilder captilisedString = new StringBuilder();
+        String captilisedString = "";
         for(String token : tokens){
             int len = token.length();
 
@@ -11,11 +11,8 @@ class Solution {
             }else{
                 token = token.substring(0,1).toUpperCase()+token.substring(1,len).toLowerCase();
             }
-
-            System.out.println(token);
-
-            captilisedString.append(token+" ");
+            captilisedString+= token+" ";
         }
-        return captilisedString.toString().trim();
+        return captilisedString.trim();
     }
 }
