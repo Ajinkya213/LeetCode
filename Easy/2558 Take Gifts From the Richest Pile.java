@@ -1,29 +1,21 @@
 class Solution {
-    public long pickGifts(int[] gifts, int k) {
-        //Arrays.sort(gifts);
-        long sum = 0;
-        for(int i = 0; i < k; i++){
-            int index = 0;
-            int max = -1;
-            int maxIndex = -1;
+    public long pickGifts(int[] gft, int k) {
+        Queue<Integer> max = new PriorityQueue<>((a, b) -> b - a);
+        long ans = 0;
 
-            //Finding the max
-            while(index < gifts.length){
-                if(gifts[index] > max){
-                    max = gifts[index];
-                    maxIndex = index;
-                }
-                index++;
-            }
-            //setting the squareroot
-            int squareRoot = (int) Math.sqrt(max);
-            gifts[maxIndex] = squareRoot;
+        for (int g : gft)
+        { max.add(g);
+            ans += g;
 
         }
 
-        for(int i : gifts){
-            sum += i;
+        for (int i = 0; i < k; i++) {
+            int val = max.poll();
+            ans = ans - val;
+            int rem = (int) Math.sqrt(val);
+            ans = ans + rem;
+            max.add(rem);
         }
-        return sum;
-    }
+
+        return ans; }
 }
