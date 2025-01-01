@@ -1,34 +1,24 @@
 class Solution {
     public int maxScore(String s) {
-        int max  = 0;
-        int len = s.length();
-        for(int i = 1 ; i < len; i++){
-            int localMax = 0;
-            localMax += countZeros(s.substring(0, i ));
-            localMax += countOnes(s.substring(i, len));
-
-            max = Math.max(localMax, max);
-        }
-        return max;
-    }
-
-    public static int countZeros(String str){
-        int count  = 0;
-        for(int i = 0; i < str.length(); i++){
-            if(str.charAt(i) == '0'){
-                count++;
+        int ones = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '1') {
+                ones++;
             }
         }
-        return count;
-    }
 
-    public static int countOnes(String str){
-        int count  = 0;
-        for(int i = 0; i < str.length(); i++){
-            if(str.charAt(i) == '1'){
-                count++;
+        int ans = 0;
+        int zeros = 0;
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == '1') {
+                ones--;
+            } else {
+                zeros++;
             }
+
+            ans = Math.max(ans, zeros + ones);
         }
-        return count;
+
+        return ans;
     }
 }
