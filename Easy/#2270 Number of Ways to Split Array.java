@@ -1,29 +1,29 @@
 class Solution {
+
     public int waysToSplitArray(int[] nums) {
-        int len = nums.length;
-        long frontSumArray [] = new long [len -1];
-        long backSumArray [] = new long [len -1];
+        int n = nums.length;
+        // Prefix sum array to store cumulative sums
+        long[] prefSum = new long[n];
+        prefSum[0] = nums[0];
 
-        long frontSum = 0;
-        for(int i = 0 ; i < len - 1; i++){
-            frontSum += nums[i];
-            frontSumArray[i] = frontSum;
+        // Build prefix sum array
+        for (int i = 1; i < n; i++) {
+            prefSum[i] = prefSum[i - 1] + nums[i];
         }
 
-        long backSum = 0;
-        for(int i = len - 1 ; i > 0 ; i--){
-            backSum += nums[i];
-            backSumArray[i-1] =  backSum;
-        }
+        int count = 0;
+        // Check each possible split position
+        for (int i = 0; i < n - 1; i++) {
+            // Sum of left part (0 to i)
+            long leftSum = prefSum[i];
+            // Sum of right part (i+1 to n-1)
+            long rightSum = prefSum[n - 1] - prefSum[i];
 
-        int waysToSplitArray = 0;
-
-        for(int i = 0 ; i < len - 1; i++){
-            if(frontSumArray[i] >= backSumArray[i]){
-                waysToSplitArray++;
+            if (leftSum >= rightSum) {
+                count++;
             }
         }
 
-        return waysToSplitArray;
+        return count;
     }
 }
