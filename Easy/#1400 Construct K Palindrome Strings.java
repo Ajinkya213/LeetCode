@@ -4,19 +4,15 @@ class Solution {
             return false;
         }
 
-        Map<Character, Integer> charCountMap = new HashMap<>();
+        int charMap [] = new int [26];
 
         for(char ch : s.toCharArray()){
-            if(!charCountMap.containsKey(ch)){
-                charCountMap.put(ch, 1);
-            }else{
-                charCountMap.put(ch, charCountMap.get(ch) + 1);
-            }
+            charMap[ch - 'a']++;
         }
 
         int nCount = 0;
-        for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()){
-            if (entry.getValue() % 2 == 1){
+        for(int freq : charMap){
+            if(freq % 2 == 1){
                 nCount++;
             }
         }
