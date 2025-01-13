@@ -1,24 +1,18 @@
 class Solution {
-    public String reverseOnlyLetters(String s) {
-        String lettersOnly = "";
-        for (int i = s.length() -1; i >= 0; i--){
-            if(Character.isLetter(s.charAt(i))){
-                lettersOnly += s.charAt(i);
-            }
+    public String reverseOnlyLetters(String S) {
+        Stack<Character> letters = new Stack();
+        for (char c: S.toCharArray())
+            if (Character.isLetter(c))
+                letters.push(c);
+
+        StringBuilder ans = new StringBuilder();
+        for (char c: S.toCharArray()) {
+            if (Character.isLetter(c))
+                ans.append(letters.pop());
+            else
+                ans.append(c);
         }
 
-        String resString = "";
-        int index = 0;
-        int indexq = 0;
-        while(index != s.length()){
-            if(Character.isLetter(s.charAt(index))){
-                resString+=lettersOnly.charAt(indexq);
-                indexq++;
-            }else{
-                resString+=s.charAt(index);
-            }
-            index++;
-        }
-        return resString;
+        return ans.toString();
     }
 }
