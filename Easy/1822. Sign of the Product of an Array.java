@@ -1,15 +1,15 @@
 class Solution {
     public int arraySign(int[] nums) {
-        int mult = 1;
-        for(int i : nums){
-            if(i > 0){
-                mult *= 1;
-            }else if (i < 0){
-                mult *= -1;
-            }else{
+        int countNegativeNumbers = 0;
+        for (int num : nums) {
+            if (num == 0) {
                 return 0;
             }
+            if (num < 0) {
+                countNegativeNumbers++;
+            }
         }
-        return mult;
+
+        return countNegativeNumbers % 2 == 0 ? 1 : -1;
     }
 }
