@@ -1,5 +1,6 @@
-class Solution {
+public class Solution {
     public int maxAscendingSum(int[] nums) {
+
         if (nums.length == 1){
             return nums[0];
         }
@@ -7,21 +8,18 @@ class Solution {
         if (nums.length == 0){
             return 0;
         }
+        int maxSum = 0;
+        int localSum = nums[0];
 
-        int sum = 0;
+        for (int i = 1; i < nums.length; ++i) {
+            if (nums[i] <= nums[i - 1]) {
 
-        for (int i = 0; i < nums.length - 1; i++){
-            int localSum = nums[i];
-            for(int j = i; j < nums.length - 1; j++){
-                if (nums[j] < nums[j+1]){
-                    localSum += nums[j+1];
-                }else{
-                    break;
-                }
+                maxSum = Math.max(maxSum, localSum);
+
+                localSum = 0;
             }
-            sum = Math.max(localSum, sum);
+            localSum += nums[i];
         }
-
-        return sum;
+        return Math.max(maxSum, localSum);
     }
 }
