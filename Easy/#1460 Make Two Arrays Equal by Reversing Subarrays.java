@@ -1,25 +1,17 @@
 class Solution {
     public boolean canBeEqual(int[] target, int[] arr) {
-        Map<Integer, Integer>  map= new HashMap<>();
-        for (int i =0 ; i < target.length; i++){
-            if(!map.containsKey(target[i])){
-                map.put(target[i], 1);
-            }else{
-                map.put(target[i], map.get(target[i]) + 1);
+
+        int[] elementsCount = new int[1001];
+        int uniqueCount = 0;
+
+        for(int i=0; i<target.length; i++){
+            if(elementsCount[target[i]]++ == 0){
+                uniqueCount++;
+            }
+            if(elementsCount[arr[i]]-- == 1){
+                uniqueCount--;
             }
         }
-
-        for(int i : arr){
-            if(!map.containsKey(i)){
-                return false;
-            }
-
-            map.put(i, map.get(i) - 1);
-            if(map.get(i) == 0){
-                map.remove(i);
-            }
-        }
-
-        return map.size() == 0;
+        return uniqueCount == 0;
     }
 }
